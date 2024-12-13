@@ -1,27 +1,36 @@
-import Accordion from './components/Accordion';
+import { useState } from "react";
+import DropDown from "./components/DropDown";
 import './index.css';
 
 function App () {
-    const items = [
+    // initializing select status state variable
+    const [selection, setSelection] = useState(null);
+
+    const options = [
         {
-            id: "1",
-            label: "Can I use React on a Project?",
-            content: "It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want.",
+            label: "Red",
+            value: "red",
         },
         {
-            id: "2",
-            label: "Can I use JavaScript on a Project?",
-            content: "It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want.",
+            label: "Green",
+            value: "green",
         },
         {
-            id: "3",
-            label: "Can I use Next.js on a Project?",
-            content: "It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want. It is possible to use React on any project you want.",
+            label: "Blue",
+            value: "blue",
+        },
+        {
+            label: "Black",
+            value: "black",
         },
     ]
+
+    const handleSelect = (option) => {
+        setSelection(option);
+    }
     return (
         <div className="">
-            <Accordion items = { items } />
+            <DropDown options = { options } value = { selection } onChange = { handleSelect } /> 
         </div>
     )
 }
