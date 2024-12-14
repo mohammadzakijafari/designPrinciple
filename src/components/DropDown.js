@@ -1,9 +1,32 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
+import Panel from "./Panel";
 
 function DropDown ({ options, value, onChange }) {
     // setting isOpen state variable to false
     const [isOpen, setIsOpen] = useState(false);
+    // useRef is used for the purpose of referencing elements inside our DOM
+    const divEl = useRef();
+
+    // useEffect is used to render elements based on time
+    useEffect(() => {
+        const handler = (event) => {
+            if (!divEl.current) {
+                return;
+            }
+
+            if (!divEl.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        }
+
+        document.addEventListener('click', handler, true);
+
+        // This is a clean up function used in useEffect to clean up the 
+        return () => {
+            document.removeEventListener('click', handler);
+        }
+    }, []);
 
     const handleSelectClick = () => {
         setIsOpen(!isOpen);
@@ -19,12 +42,12 @@ function DropDown ({ options, value, onChange }) {
         return <div key = { option.value } onClick = {() => handleOptionClick(option) } className="hover:bg-sky-100 rounded cursor-pointer p-1"> { option.label } </div>
     });
     return (
-        <div className="w-48 relative"> 
-            <div onClick = {() => handleSelectClick(options) } className="flex justify-between items-center cursor-pointer border rounded p-3 bg-white w-full">
+        <div ref = {divEl} className="w-48 relative"> 
+            <Panel onClick = {() => handleSelectClick(options) } className="flex justify-between items-center cursor-pointer">
                 {value?.label || "Select ..."} 
                 <IoIosArrowDown />
-            </div>
-            {isOpen && <div className="absolute top-full border rounded p-3 shadow bg-white w-full"> { renderedOptions } </div>}
+            </Panel>
+            {isOpen && <Panel className="absolute top-full"> { renderedOptions } </Panel>}
         </div>
     )
 }
