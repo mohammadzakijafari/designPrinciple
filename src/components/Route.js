@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import NavigationContext from "../context/Navigation";
+import useNavigation from "../hooks/use-navigation";
 
 function Route ({ path, children }) {
     // Accessing the current path from context that we have created previously
-    const { currentPath } = useContext(NavigationContext);
+    const { currentPath } = useNavigation();
 
     // checking if this path is equal to the current path and display the relevant content
     if (path === currentPath) {
