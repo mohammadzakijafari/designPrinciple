@@ -7,6 +7,7 @@ function NavigationProvider ({ children }) {
 
     // using useEffect to capture the back and forward move of users for better navigation
     useEffect(() => {
+        // getting the current path while user browse back and forward in app
         const handler = () => {
             setCurrentPath(window.location.pathname);
         };
