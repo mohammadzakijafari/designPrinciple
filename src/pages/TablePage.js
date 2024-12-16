@@ -1,5 +1,5 @@
 import SortableTable from "../components/SortableTable";
-import Table from "../components/Table";
+// import Table from "../components/Table";
 
 function TablePage () {
     const data = [
