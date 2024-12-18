@@ -1,3 +1,4 @@
+import Counter from './components/Counter';
 import Route from './components/Route';
 import Sidebar from './components/Sidebar';
 import './index.css';
@@ -28,6 +29,9 @@ function App () {
                 </Route>
                 <Route path = "/table">
                     <TablePage />
+                </Route>
+                <Route path = "/counter">
+                    <Counter />
                 </Route>
             </div>
         </div>
